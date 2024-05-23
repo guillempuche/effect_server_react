@@ -1,0 +1,9 @@
+{
+  "name": "adapters/repositories",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/adapters/repositories/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project adapters --web",
+  "targets": {}
+}
