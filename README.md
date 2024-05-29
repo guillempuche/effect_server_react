@@ -22,4 +22,3 @@ EffectJS
   - <https://github.com/effect-app/sample/>
   - <https://github.com/ccntrq/git-jira-branch/blob/master/src/types.ts>
   - <https://github.com/TylorS/typed/blob/development/examples/todomvc>
-  - Incl. auth, migrations <https://github.com/datner/effect-remix>

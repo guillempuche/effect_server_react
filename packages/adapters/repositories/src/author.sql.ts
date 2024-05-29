@@ -2,7 +2,7 @@ import { Schema } from '@effect/schema'
 import * as Sql from '@effect/sql'
 import { Context, Effect, Layer } from 'effect'
 
-import { Author } from '@journals/core'
+import { Author, castTemporal } from '@journals/core'
 import {
 	UseCaseAuthorAdd,
 	UseCaseAuthorDelete,
@@ -20,40 +20,36 @@ export const makeSqlAuthor = Effect.gen(function* (_) {
 		execute: author => sql`INSERT INTO authors ${sql.insert(author)}`,
 	})
 
-	const DeleteAuthor = yield* Sql.resolver.ordered('AuthorDelete', {
+	const DeleteAuthor = Sql.schema.void({
 		Request: UseCaseAuthorDelete,
-		Result: Schema.Void,
-		execute: ids => sql`DELETE FROM authors WHERE id IN ${sql.in(ids)}`,
+		execute: id => sql`DELETE FROM authors WHERE id = ${id}`,
 	})
 
-	const GetAuthor = yield* Sql.schema.findOne({
+	const GetAuthor = Sql.schema.findOne({
 		Request: UseCaseAuthorGet,
 		Result: Author,
-		// ResultId: result => result.id,
-		execute: ids => sql`SELECT * FROM authors WHERE id IN ${sql.in(ids)}`,
+		execute: id => sql`SELECT * FROM authors WHERE id = ${id}`,
 	})
 
-	const UpdateAuthor = yield* Sql.schema. .ordered('AuthorUpdate', {
+	const UpdateAuthor = Sql.schema.single({
 		Request: UseCaseAuthorUpdate,
 		Result: Author,
-		execute: requests => {
-			const { id, ...rest } = requests
-			return sql`UPDATE authors SET ${sql.update(
-				rest,
-			)} WHERE id = ${id} RETURNING authors.*`
+		execute: ({ id, updated_at, ...rest }) => {
+			const updateData = updated_at
+				? { ...rest, updated_at: castTemporal(updated_at) }
+				: rest
 
-			// const { id, ...rest } = requests[0]
-			// return sql`UPDATE authors SET ${sql.update(
-			// 	rest,
-			// )} WHERE id = ${id} RETURNING authors.*`
+			return sql`UPDATE authors SET ${sql.update(
+				updateData,
+			)} WHERE id = ${id} RETURNING authors.*`
 		},
 	})
 
 	return {
-		insertAuthor: InsertAuthor.execute,
-		deleteAuthor: DeleteAuthor.execute,
-		getAuthor: GetAuthor.execute,
-		updateAuthor: UpdateAuthor.execute,
+		insertAuthor: InsertAuthor,
+		deleteAuthor: DeleteAuthor,
+		getAuthor: GetAuthor,
+		updateAuthor: UpdateAuthor,
 	}
 })
 

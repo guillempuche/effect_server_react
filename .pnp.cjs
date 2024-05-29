@@ -47,6 +47,7 @@ const RAW_RUNTIME_STATE =
           ["@swc/core", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:1.3.107"],\
           ["@swc/helpers", "npm:0.5.11"],\
           ["@types/body-parser", "npm:1.19.5"],\
+          ["@types/express", "npm:4.17.21"],\
           ["@types/jest", "npm:29.5.12"],\
           ["@types/koa", "npm:2.13.12"],\
           ["@types/node", "npm:18.16.20"],\
@@ -57,6 +58,7 @@ const RAW_RUNTIME_STATE =
           ["effect", "npm:3.1.3"],\
           ["effect-http", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:0.66.0"],\
           ["effect-http-node", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:0.13.0"],\
+          ["effect-log", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:0.31.3"],\
           ["esbuild", "npm:0.19.12"],\
           ["hono", "npm:4.3.7"],\
           ["jest", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:29.7.0"],\
@@ -3722,6 +3724,7 @@ const RAW_RUNTIME_STATE =
           ["@swc/core", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:1.3.107"],\
           ["@swc/helpers", "npm:0.5.11"],\
           ["@types/body-parser", "npm:1.19.5"],\
+          ["@types/express", "npm:4.17.21"],\
           ["@types/jest", "npm:29.5.12"],\
           ["@types/koa", "npm:2.13.12"],\
           ["@types/node", "npm:18.16.20"],\
@@ -3732,6 +3735,7 @@ const RAW_RUNTIME_STATE =
           ["effect", "npm:3.1.3"],\
           ["effect-http", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:0.66.0"],\
           ["effect-http-node", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:0.13.0"],\
+          ["effect-log", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:0.31.3"],\
           ["esbuild", "npm:0.19.12"],\
           ["hono", "npm:4.3.7"],\
           ["jest", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:29.7.0"],\
@@ -6897,6 +6901,28 @@ const RAW_RUNTIME_STATE =
           "@types/effect__platform",\
           "@types/effect__schema",\
           "effect-http",\
+          "effect"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["effect-log", [\
+      ["npm:0.31.3", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/effect-log-npm-0.31.3-4c3e7e0a5f-10c0.zip/node_modules/effect-log/",\
+        "packageDependencies": [\
+          ["effect-log", "npm:0.31.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:0.31.3", {\
+        "packageLocation": "./.yarn/__virtual__/effect-log-virtual-cb30b5087f/6/.yarn/berry/cache/effect-log-npm-0.31.3-4c3e7e0a5f-10c0.zip/node_modules/effect-log/",\
+        "packageDependencies": [\
+          ["effect-log", "virtual:3d22c94c7081791d0eb64998d80d41e9333808ff9c665fdbeeed363087c7d9b9e4e6be34329f2502bd541ae4ebc1b63b8f8d5489a9e61e2d409eb278dd0b3c67#npm:0.31.3"],\
+          ["@types/effect", null],\
+          ["effect", "npm:3.1.3"]\
+        ],\
+        "packagePeers": [\
+          "@types/effect",\
           "effect"\
         ],\
         "linkType": "HARD"\

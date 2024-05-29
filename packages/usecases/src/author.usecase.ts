@@ -18,7 +18,10 @@ export const UseCaseAuthorGet = S.UUID
 export type UseCaseAuthorGet = typeof UseCaseAuthorDelete.Type
 
 // Update
-export const UseCaseAuthorUpdate = S.partial(Author, { exact: true }).pipe(
-	S.omit('created_at'),
+// export const UseCaseAuthorUpdate = S.partial(Author, { exact: true }).pipe(
+// 	S.omit('created_at', 'created_by_id'),
+// )
+export const UseCaseAuthorUpdate = Author.pipe(
+	S.omit('created_at', 'created_by_id'),
 )
 export type UseCaseAuthorUpdate = typeof UseCaseAuthorUpdate.Type

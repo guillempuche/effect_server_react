@@ -14,8 +14,8 @@ const LiveMain = LiveServer.pipe(
 	Layer.merge(LiveRouteAuthorDeleteAuthor),
 	Layer.merge(LiveRouteAuthorGetAuthor),
 	Layer.merge(LiveRouteAuthorUpdateAuthor),
-	Layer.provide(Express.Live),
-	Layer.provide(RepoAuthor.Live),
+	Layer.provide(Express.live),
+	Layer.provide(RepoAuthor.live),
 )
 
 Layer.launch(LiveMain).pipe(

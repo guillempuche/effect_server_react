@@ -20,11 +20,11 @@ export const LiveServer = Layer.scopedDiscard(
 	}),
 )
 
-export class Express extends Context.Tag('@server/Express')<
+export class Express extends Context.Tag('@server/express')<
 	Express,
 	ReturnType<typeof express>
 >() {
-	static readonly Live = Layer.sync(Express, () => {
+	static readonly live = Layer.sync(Express, () => {
 		const app = express()
 
 		app.use(bodyParser.json())

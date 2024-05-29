@@ -1,7 +1,7 @@
 import { Cause, Context, Effect, Layer, Option, pipe } from 'effect'
 import { Temporal } from 'temporal-polyfill'
 
-import { Author, authorV1_0_0, uuid } from '@journals/core'
+import { Author, AuthorVersions, uuid } from '@journals/core'
 import type {
 	UseCaseAuthorAdd,
 	UseCaseAuthorDelete,
@@ -34,7 +34,7 @@ const makeRepoAuthor = Effect.gen(function* (_) {
 				...params,
 				id: uuid(),
 				created_at: Temporal.Now.zonedDateTimeISO(),
-				version: authorV1_0_0,
+				version: AuthorVersions['1.0.0'],
 			})
 			return sql.insertAuthor(newAuthor)
 		},
@@ -44,7 +44,7 @@ const makeRepoAuthor = Effect.gen(function* (_) {
 			pipe(
 				sql.getAuthor(id),
 				Effect.andThen(maybeAuthor => {
-					Option.match(maybeAuthor, {
+					return Option.match(maybeAuthor, {
 						onNone: () => Effect.fail(new Cause.NoSuchElementException()),
 						onSome: author => {
 							const updatedAuthor = new Author({
@@ -69,7 +69,9 @@ export class RepoAuthor extends Context.Tag('@repositories/RepoAuthor')<
 	RepoAuthor,
 	Effect.Effect.Success<typeof makeRepoAuthor>
 >() {
-	static live = Layer.effect(this, makeRepoAuthor)
+	static live = Layer.effect(this, makeRepoAuthor).pipe(
+		Layer.provide(SqlAuthor.live),
+	)
 }
 
 // const makeRepoAuthorOld = Effect.gen(function* (_) {

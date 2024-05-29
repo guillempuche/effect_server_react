@@ -1,3 +1,3 @@
-# usecases
+## Resources
 
-This library was generated with [Nx](https://nx.dev).
+- Effect usecases and repos <https://github.com/effect-app/sample/blob/main/api/src/Usecases/Blog.Controllers.ts>
