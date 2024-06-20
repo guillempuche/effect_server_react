@@ -60,6 +60,6 @@ export class SqlAuthor extends Context.Tag('@repositories/SqlAuthor')<
 	SqlAuthor,
 	Effect.Effect.Success<typeof makeSqlAuthor>
 >() {
-	static live = Layer.effect(this, makeSqlAuthor)
-	static layer = Layer.provide(this.live, SqlLive)
+	static Live = Layer.effect(this, makeSqlAuthor)
+	static Layer = Layer.provide(this.Live, SqlLive)
 }

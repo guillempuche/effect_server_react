@@ -69,32 +69,28 @@ export class RepoAuthor extends Context.Tag('@repositories/RepoAuthor')<
 	RepoAuthor,
 	Effect.Effect.Success<typeof makeRepoAuthor>
 >() {
-	static live = Layer.effect(this, makeRepoAuthor).pipe(
-		Layer.provide(SqlAuthor.live),
+	static Live = Layer.effect(this, makeRepoAuthor).pipe(
+		Layer.provide(SqlAuthor.Live),
 	)
 }
+type RepoAuthorShape = Context.Tag.Service<RepoAuthor>
 
 // const makeRepoAuthorOld = Effect.gen(function* (_) {
 // 	const refAuthors = yield* _(Ref.make(HashMap.empty<string, Author>()))
-
 // 	const addAuthor = (params: UseCaseAuthorAdd): Effect.Effect<Author> => {
 // 		const id = uuid()
-
 // 		const newTodo = new Author({
 // 			...params,
 // 			id,
 // 			created_at: Temporal.Now.zonedDateTimeISO(),
 // 			version: authorV1_0_0,
 // 		})
-
 // 		Ref.modify(refAuthors, map => {
 // 			const updated = HashMap.set(map, newTodo.id, newTodo)
 // 			return [newTodo.id, updated]
 // 		})
-
 // 		return Effect.succeed(newTodo)
 // 	}
-
 // 	const deleteAuthor = (id: UseCaseAuthorDelete): Effect.Effect<void> =>
 // 		Ref.get(refAuthors).pipe(
 // 			Effect.flatMap(map =>
