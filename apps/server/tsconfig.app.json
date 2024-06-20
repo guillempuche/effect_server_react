@@ -5,9 +5,9 @@
     "target": "ESNext",
     "module": "ESNext",
     "types": [],
-    // Hono allows JSX syntax
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    // // Hono allows JSX syntax
+    // "jsx": "react-jsx",
+    // "jsxImportSource": "hono/jsx"
   },
   "exclude": [
     "jest.config.ts",

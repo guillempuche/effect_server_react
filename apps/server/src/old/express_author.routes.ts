@@ -3,7 +3,7 @@ import { Effect, FiberSet, Layer, Option } from 'effect'
 
 import { RepoAuthor } from '@journals/adapters/repositories'
 import { AuthorCreateParams, AuthorUpdateParams } from '@journals/usecases'
-import { Express } from './server'
+import { Express } from './express_server'
 
 // Add author
 export const LiveRouteAuthorAddAuthor = Layer.scopedDiscard(

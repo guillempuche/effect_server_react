@@ -47,7 +47,7 @@ const program = app.pipe(
 	Effect.tap(Effect.logInfo('Server docs at http://localhost:4000/docs#/')),
 	// Effect.flatMap(NodeServer.listen({ port: 4000 })),
 	Effect.provide(SqlLive.pipe(Layer.provide(DevTools.layer()))),
-	Effect.provide(RepoAuthor.live),
+	Effect.provide(RepoAuthor.Live),
 	NodeServer.listen({ port: 4000 }),
 	Effect.tapErrorCause(Effect.logError),
 	Effect.provide(loggerDebug),
