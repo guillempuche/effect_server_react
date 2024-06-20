@@ -3,6 +3,5 @@
     "biomejs.biome",
     "nrwl.angular-console",
     "arcanis.vscode-zipfs",
-    "esbenp.prettier-vscode"
   ]
 }

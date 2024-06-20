@@ -1,52 +1,43 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "sourceMap": true,
-    "declaration": false,
-    "alwaysStrict": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "allowJs": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "ESNext",
-    "module": "ESNext",
-    "lib": [
-      "ESNext",
-      "dom"
-    ],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "esModuleInterop": true,
-    "allowUnreachableCode": false,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noFallthroughCasesInSwitch": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "useUnknownInCatchVariables": true,
-    "baseUrl": ".",
-    "rootDir": ".",
-    "paths": {
-      "@journals/adapters/repositories": [
-        "packages/adapters/repositories/src/index.ts"
-      ],
-      "@journals/core": [
-        "packages/core/src/index.ts"
-      ],
-      "@journals/usecases": [
-        "packages/usecases/src/index.ts"
-      ]
-    }
-  },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+	"compileOnSave": false,
+	"compilerOptions": {
+		"sourceMap": true,
+		"declaration": false,
+		"alwaysStrict": true,
+		"strict": true,
+		"moduleResolution": "node",
+		"allowJs": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": ["ESNext", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"esModuleInterop": true,
+		"allowUnreachableCode": false,
+		"allowImportingTsExtensions": true,
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noFallthroughCasesInSwitch": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"useUnknownInCatchVariables": true,
+		"baseUrl": ".",
+		"rootDir": ".",
+		"paths": {
+			"@journals/adapters/repositories": [
+				"packages/adapters/repositories/src/index.ts"
+			],
+			"@journals/core": ["packages/core/src/index.ts"],
+			"@journals/usecases": ["packages/usecases/src/index.ts"]
+		}
+	},
+	"exclude": ["node_modules", "tmp"]
 }
