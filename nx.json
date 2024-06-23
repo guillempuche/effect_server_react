@@ -1,9 +1,10 @@
 {
-	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"$schema": ".yarn/unplugged/nx-virtual-cbdbf0b4d0/node_modules/nx/schemas/nx-schema.json",
 	"cli": {
 		"packageManager": "yarn",
 		"analytics": false
 	},
+	"defaultBase": "main",
 	"namedInputs": {
 		"default": ["{projectRoot}/**/*", "sharedGlobals"],
 		"production": [
@@ -30,8 +31,7 @@
 			"plugin": "@nx/jest/plugin",
 			"options": {
 				"targetName": "test"
-			},
-			"exclude": ["apps/test-server-e2e/**/*"]
+			}
 		},
 		{
 			"plugin": "@nx/eslint/plugin",

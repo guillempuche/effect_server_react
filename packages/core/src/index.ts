@@ -1,2 +1,2 @@
-export * from './entities'
-export * from './types'
+export * from './entities.js'
+export * from './types.js'

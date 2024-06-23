@@ -2,8 +2,8 @@ import { Schema } from '@effect/schema'
 import { Effect, FiberSet, Layer, Option } from 'effect'
 
 import { RepoAuthor } from '@journals/adapters/repositories'
-import { AuthorCreateParams, AuthorUpdateParams } from '@journals/usecases'
-import { Express } from './express_server'
+import { UseCaseAuthorAdd, UseCaseAuthorUpdate } from '@journals/usecases'
+import { Express } from './express_server.js'
 
 // Add author
 export const LiveRouteAuthorAddAuthor = Layer.scopedDiscard(
@@ -12,7 +12,7 @@ export const LiveRouteAuthorAddAuthor = Layer.scopedDiscard(
 		const runFork = yield* FiberSet.makeRuntime<RepoAuthor>()
 
 		app.post('/authors', (req, res) => {
-			const decodeBody = Schema.decodeUnknown(AuthorCreateParams)
+			const decodeBody = Schema.decodeUnknown(UseCaseAuthorAdd)
 			const program = RepoAuthor.pipe(
 				Effect.flatMap(repo =>
 					decodeBody(req.body).pipe(
@@ -90,7 +90,7 @@ export const LiveRouteAuthorUpdateAuthor = Layer.scopedDiscard(
 
 		app.put('/authors/:id', (req, res) => {
 			const id = req.params.id
-			const decodeBody = Schema.decodeUnknown(AuthorUpdateParams)
+			const decodeBody = Schema.decodeUnknown(UseCaseAuthorUpdate)
 			const program = RepoAuthor.pipe(
 				Effect.flatMap(repo =>
 					decodeBody(req.body).pipe(

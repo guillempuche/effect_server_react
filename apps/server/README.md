@@ -26,8 +26,10 @@ Authentication:
 - Effect Remix session, bearer token, auth headers, <https://github.com/datner/effect-remix/blob/main/app/services.server/Auth.ts>, <https://github.com/datner/effect-remix/blob/main/app/routes/api.user.ts>
 - User context <https://github.com/sukovanej/effect-http/blob/main/packages/effect-http-node/examples/readme-security.ts>, <https://github.com/sukovanej/effect-http/blob/main/packages/effect-http-node/examples/readme-security-complex.ts>
 - Validate JWT with Jose package <https://github.com/JJayet/text-justify/blob/main/src/auth/validateToken.ts>, <https://github.com/JJayet/text-justify/blob/main/src/routes/token.ts#L13>
+- Cookies, NextJS <https://www.sandromaglione.com/articles/next-js-authentication-with-effect-and-react-19>
 
 Telemetry:
 
 - Metrics <https://github.com/IMax153/advanced-effect-workshop/blob/main/workshop/solutions/session-04/exercise-02.ts>, <https://github.com/mikearnaldi/lambda-conf-2024/blob/main/src/tracing.ts>
 - Logs <https://github.com/dmmulroy/effect-twitch-integrations/blob/main/src/twitch/service.ts>
+- OpenTelemetry <https://gist.github.com/ecyrbe/26e4f8ed8a68bd73e8b3575481f55775#file-note-api-ts-L202>

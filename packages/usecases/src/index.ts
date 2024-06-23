@@ -1,2 +1,2 @@
-export * from './author.usecase'
-export * from './journal.usecase'
+export * from './author.usecase.js'
+export * from './journal.usecase.js'

@@ -6,8 +6,8 @@ import {
 	LiveRouteAuthorDeleteAuthor,
 	LiveRouteAuthorGetAuthor,
 	LiveRouteAuthorUpdateAuthor,
-} from './author.routes'
-import { Express, LiveServer } from './express_server'
+} from './express_author.routes.js'
+import { Express, LiveServer } from './express_server.js'
 
 const LiveMain = LiveServer.pipe(
 	Layer.merge(LiveRouteAuthorAddAuthor),

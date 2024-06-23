@@ -1,12 +1,22 @@
 import { DevTools } from '@effect/experimental'
+import { NodeSdk } from '@effect/opentelemetry'
 import { NodeRuntime } from '@effect/platform-node'
+import {
+	BatchSpanProcessor,
+	ConsoleSpanExporter,
+} from '@opentelemetry/sdk-trace-node'
 import { Effect, Layer } from 'effect'
 import { Middlewares, RouterBuilder } from 'effect-http'
 import { NodeServer } from 'effect-http-node'
 
-import { RepoAuthor, SqlLive } from '@journals/adapters/repositories'
-import { api } from './api'
-import { appError, loggerDebug } from './utils'
+import {
+	RepoAuthor,
+	RepoServices,
+	SQLServices,
+	SqlLive,
+} from '@journals/adapters/repositories'
+import { api } from './api.js'
+import { appError, loggerDebug } from './utils.js'
 
 export const app = Effect.gen(function* () {
 	const repoAuthor = yield* RepoAuthor
@@ -43,15 +53,25 @@ export const app = Effect.gen(function* () {
 	)
 })
 
-const program = app.pipe(
-	Effect.tap(Effect.logInfo('Server docs at http://localhost:4000/docs#/')),
-	// Effect.flatMap(NodeServer.listen({ port: 4000 })),
-	Effect.provide(SqlLive.pipe(Layer.provide(DevTools.layer()))),
-	Effect.provide(RepoAuthor.Live),
-	NodeServer.listen({ port: 4000 }),
-	Effect.tapErrorCause(Effect.logError),
-	Effect.provide(loggerDebug),
-	// NodeRuntime.runMain,
-)
+/**
+ * OpenTelemetry service in console
+ */
+const OpenTelemetryService = NodeSdk.layer(() => ({
+	resource: { serviceName: 'notes' },
+	spanProcessor: new BatchSpanProcessor(new ConsoleSpanExporter()),
+}))
 
-NodeRuntime.runMain(program)
+// Run the server
+app.pipe(
+	Effect.flatMap(NodeServer.listen({ port: 4000 })),
+	Effect.tap(Effect.logInfo('Server docs at http://localhost:4000/docs#/')), // Tap is for side-effecting operations that do not change the value being passed through the chain
+	Effect.provide(
+		Layer.merge(RepoServices, SqlLive.pipe(Layer.provide(DevTools.layer()))),
+	),
+	Effect.provide(SQLServices),
+	Effect.provide(OpenTelemetryService),
+	Effect.provide(loggerDebug),
+	Effect.tapErrorCause(Effect.logError), // Tap andles errors by logging them without interrupting the chain of effects.
+	// @ts-expect-error
+	NodeRuntime.runMain,
+)

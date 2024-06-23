@@ -1,6 +1,11 @@
 import * as S from '@effect/schema/Schema'
 
-import { type EntityId, VERSION_INITIAL, Version, ZonedDateTime } from '.'
+import {
+	type EntityId,
+	VERSION_INITIAL,
+	Version,
+	ZonedDateTime,
+} from './index.js'
 
 // ============================================================================
 // Entity

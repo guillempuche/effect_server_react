@@ -8,7 +8,7 @@ import type {
 	UseCaseAuthorGet,
 	UseCaseAuthorUpdate,
 } from '@journals/usecases'
-import { SqlAuthor } from './author.sql'
+import { SqlAuthor } from './author.sql.js'
 
 // interface RepoAuthor {
 // 	readonly addAuthor: (
@@ -24,7 +24,7 @@ import { SqlAuthor } from './author.sql'
 // 	) => Effect.Effect<Author, Cause.NoSuchElementException>
 // }
 // const RepoAuthor = Context.GenericTag<RepoAuthor>('@repositories/RepoAuthor')
-const makeRepoAuthor = Effect.gen(function* (_) {
+const make = Effect.gen(function* (_) {
 	const sql = yield* SqlAuthor
 
 	// return RepoAuthor.of({})
@@ -64,18 +64,19 @@ const makeRepoAuthor = Effect.gen(function* (_) {
 	}
 })
 // export const repoAuthor = Effect.serviceFunctions(RepoAuthor)
-// export const RepoAuthorLive = Layer.effect(RepoAuthor, makeRepoAuthor)
+// export const RepoAuthorLive = Layer.effect(RepoAuthor, make)
 export class RepoAuthor extends Context.Tag('@repositories/RepoAuthor')<
 	RepoAuthor,
-	Effect.Effect.Success<typeof makeRepoAuthor>
+	Effect.Effect.Success<typeof make>
 >() {
-	static Live = Layer.effect(this, makeRepoAuthor).pipe(
-		Layer.provide(SqlAuthor.Live),
-	)
+	static Live = Layer.effect(this, make)
+	// .pipe(
+	// 	Layer.provide(SqlAuthor.Live),
+	// )
 }
-type RepoAuthorShape = Context.Tag.Service<RepoAuthor>
+export type RepoAuthorType = Context.Tag.Service<RepoAuthor>
 
-// const makeRepoAuthorOld = Effect.gen(function* (_) {
+// const makeOld = Effect.gen(function* (_) {
 // 	const refAuthors = yield* _(Ref.make(HashMap.empty<string, Author>()))
 // 	const addAuthor = (params: UseCaseAuthorAdd): Effect.Effect<Author> => {
 // 		const id = uuid()
@@ -133,13 +134,13 @@ type RepoAuthorShape = Context.Tag.Service<RepoAuthor>
 // })
 // export class RepoAuthor extends Effect.Tag('@repos/RepoAuthor')<
 // 	RepoAuthor,
-// 	Effect.Effect.Success<typeof makeRepoAuthor>
+// 	Effect.Effect.Success<typeof make>
 // >() {
-// 	static Live = Layer.effect(this, makeRepoAuthor)
+// 	static Live = Layer.effect(this, make)
 // }
 // export class RepoAuthorOld extends Context.Tag('@repositories/RepoAuthorOld')<
 // 	RepoAuthorOld,
-// 	Effect.Effect.Success<typeof makeRepoAuthorOld>
+// 	Effect.Effect.Success<typeof makeOld>
 // >() {
-// 	static readonly Live = Layer.effect(RepoAuthorOld, makeRepoAuthorOld)
+// 	static readonly Live = Layer.effect(RepoAuthorOld, makeOld)
 // }
