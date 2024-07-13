@@ -1,4 +1,3 @@
-import { Schema } from '@effect/schema'
 import * as Sql from '@effect/sql'
 import { Context, Effect, Layer } from 'effect'
 
@@ -9,7 +8,7 @@ import {
 	UseCaseAuthorGet,
 	UseCaseAuthorUpdate,
 } from '@journals/usecases'
-import { SqlLive } from './db.js'
+import { ServiceSqlBase } from './db.js'
 
 const make = Effect.gen(function* (_) {
 	const sql = yield* Sql.client.Client
@@ -53,14 +52,11 @@ const make = Effect.gen(function* (_) {
 	}
 })
 
-// export const SqlAuthor = Context.Tag<ReturnType<typeof make>>(
-// 	'@repositories/SqlAuthor',
-// )
 export class SqlAuthor extends Context.Tag('@repositories/SqlAuthor')<
 	SqlAuthor,
 	Effect.Effect.Success<typeof make>
 >() {
-	static Live = Layer.effect(this, make)
-	// static Layer = Layer.provide(this.Live, SqlLive)
-	// static Layer = Layer.provide(this.Live)
+	static Base = Layer.effect(this, make)
+	// static Layer = Layer.provide(this.Base)
+	static Layer = Layer.provide(this.Base, ServiceSqlBase)
 }

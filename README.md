@@ -22,3 +22,4 @@ EffectJS
   - <https://github.com/effect-app/sample/>
   - <https://github.com/ccntrq/git-jira-branch/blob/master/src/types.ts>
   - <https://github.com/TylorS/typed/blob/development/examples/todomvc>
+- OTLP telemetry, datadog, span <https://discord.com/channels/795981131316985866/1238798884453482537/1258171303274483834>

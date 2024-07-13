@@ -1,15 +1,15 @@
 {
-  "name": "db_migrator",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/db_migrator/src",
-  "projectType": "application",
-  "tags": [],
-  "targets": {
-    "execute": {
-      "executor": "@nx/js:node",
-      "options": {
-        "main": "apps/db_migrator/src/main.ts"
-      }
-    }
-  }
+	"name": "db_migrator",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/db_migrator/src",
+	"projectType": "application",
+	"tags": [],
+	"targets": {
+		"execute": {
+			"executor": "@nx/js:node",
+			"options": {
+				"main": "apps/db_migrator/src/main.ts"
+			}
+		}
+	}
 }

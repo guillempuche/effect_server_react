@@ -10,24 +10,9 @@ import type {
 } from '@journals/usecases'
 import { SqlAuthor } from './author.sql.js'
 
-// interface RepoAuthor {
-// 	readonly addAuthor: (
-// 		params: UseCaseAuthorAdd,
-// 	) => Effect.Effect<Author, ResultLengthMismatch | SqlError | ParseError>
-// 	readonly deleteAuthor: (id: UseCaseAuthorDelete) => Effect.Effect<void>
-// 	readonly getAuthor: (
-// 		id: UseCaseAuthorGet,
-// 	) => Effect.Effect<Option.Option<Author>>
-// 	readonly updateAuthor: (
-// 		id: string,
-// 		params: UseCaseAuthorUpdate,
-// 	) => Effect.Effect<Author, Cause.NoSuchElementException>
-// }
-// const RepoAuthor = Context.GenericTag<RepoAuthor>('@repositories/RepoAuthor')
 const make = Effect.gen(function* (_) {
 	const sql = yield* SqlAuthor
 
-	// return RepoAuthor.of({})
 	return {
 		addAuthor: (params: UseCaseAuthorAdd) => {
 			const newAuthor = new Author({
@@ -69,78 +54,7 @@ export class RepoAuthor extends Context.Tag('@repositories/RepoAuthor')<
 	RepoAuthor,
 	Effect.Effect.Success<typeof make>
 >() {
-	static Live = Layer.effect(this, make)
-	// .pipe(
-	// 	Layer.provide(SqlAuthor.Live),
-	// )
+	static Base = Layer.effect(this, make)
+	static Layer = Layer.provide(this.Base, SqlAuthor.Layer)
 }
 export type RepoAuthorType = Context.Tag.Service<RepoAuthor>
-
-// const makeOld = Effect.gen(function* (_) {
-// 	const refAuthors = yield* _(Ref.make(HashMap.empty<string, Author>()))
-// 	const addAuthor = (params: UseCaseAuthorAdd): Effect.Effect<Author> => {
-// 		const id = uuid()
-// 		const newTodo = new Author({
-// 			...params,
-// 			id,
-// 			created_at: Temporal.Now.zonedDateTimeISO(),
-// 			version: authorV1_0_0,
-// 		})
-// 		Ref.modify(refAuthors, map => {
-// 			const updated = HashMap.set(map, newTodo.id, newTodo)
-// 			return [newTodo.id, updated]
-// 		})
-// 		return Effect.succeed(newTodo)
-// 	}
-// 	const deleteAuthor = (id: UseCaseAuthorDelete): Effect.Effect<void> =>
-// 		Ref.get(refAuthors).pipe(
-// 			Effect.flatMap(map =>
-// 				HashMap.has(map, id)
-// 					? Ref.set(refAuthors, HashMap.remove(map, id)).pipe(Effect.as(true))
-// 					: Effect.succeed(false),
-// 			),
-// 		)
-
-// 	const getAuthor = (
-// 		id: UseCaseAuthorGet,
-// 	): Effect.Effect<Option.Option<Author>> =>
-// 		Ref.get(refAuthors).pipe(Effect.map(HashMap.get(id)))
-
-// 	const updateAuthor = (
-// 		id: string,
-// 		params: UseCaseAuthorUpdate,
-// 	): Effect.Effect<Author, Cause.NoSuchElementException> =>
-// 		Ref.get(refAuthors).pipe(
-// 			Effect.flatMap(map => {
-// 				const maybeAuthor = HashMap.get(map, id)
-
-// 				if (Option.isNone(maybeAuthor))
-// 					return Effect.fail(new Cause.NoSuchElementException())
-
-// 				const newAuthor = new Author({ ...maybeAuthor.value, ...params })
-// 				const updated = HashMap.set(map, id, newAuthor)
-
-// 				// 'Effect.as' transforms the result of the previous effect (which is the
-// 				// successful update of the refAuthors) into returning the newAuthor object.
-// 				return Ref.set(refAuthors, updated).pipe(Effect.as(newAuthor))
-// 			}),
-// 		)
-// 	return {
-// 		addAuthor,
-// 		deleteAuthor,
-// 		getAuthor,
-// 		updateAuthor,
-// 	}
-// })
-// export class RepoAuthor extends Effect.Tag('@repos/RepoAuthor')<
-// 	RepoAuthor,
-// 	Effect.Effect.Success<typeof make>
-// >() {
-// 	static Live = Layer.effect(this, make)
-// }
-// export class RepoAuthorOld extends Context.Tag('@repositories/RepoAuthorOld')<
-// 	RepoAuthorOld,
-// 	Effect.Effect.Success<typeof makeOld>
-// >() {
-// 	static readonly Live = Layer.effect(RepoAuthorOld, makeOld)
-// }

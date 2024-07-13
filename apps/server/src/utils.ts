@@ -10,7 +10,7 @@ export const appError = (message: string) =>
 		}),
 	)
 
-export const loggerDebug = pipe(
+export const ServiceLoggerDebug = pipe(
 	PrettyLogger.layer(),
 	Layer.merge(Logger.minimumLogLevel(LogLevel.All)),
 )

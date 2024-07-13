@@ -1,6 +1,6 @@
 import { Effect, Layer } from 'effect'
 
-import { RepoAuthor } from './author.repo'
+import { RepoAuthor } from './author.repo.js'
 
 const make = Effect.gen(function* () {
 	yield* Effect.logInfo('Starting RepoServices')
@@ -10,6 +10,6 @@ const make = Effect.gen(function* () {
 	)
 }).pipe(Effect.annotateLogs({ module: 'sql-service' }))
 
-export const RepoServices = Layer.scopedDiscard(make).pipe(
-	Layer.provide(RepoAuthor.Live),
+export const ServiceRepositories = Layer.scopedDiscard(make).pipe(
+	Layer.provide(RepoAuthor.Layer),
 )

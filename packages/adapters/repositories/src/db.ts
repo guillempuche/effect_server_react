@@ -10,4 +10,4 @@ const ConfigSQL = Config.all({
 	username: Config.succeed('DB_USERNAME'),
 })
 
-export const SqlLive = Pg.client.layer(ConfigSQL)
+export const ServiceSqlBase = Pg.client.layer(ConfigSQL)

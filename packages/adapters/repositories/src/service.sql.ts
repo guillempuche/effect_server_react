@@ -1,14 +1,14 @@
 import { Effect, Layer } from 'effect'
-import { SqlAuthor } from './author.sql'
+import { SqlAuthor } from './author.sql.js'
 
 const make = Effect.gen(function* () {
-	yield* Effect.logInfo('Starting SQLServices')
+	yield* Effect.logInfo('Starting ServiceSQL')
 
-	yield* Effect.acquireRelease(Effect.logInfo('SQLServices started'), () =>
-		Effect.logInfo('SQLServices stopped'),
+	yield* Effect.acquireRelease(Effect.logInfo('ServiceSQL started'), () =>
+		Effect.logInfo('ServiceSQL stopped'),
 	)
 }).pipe(Effect.annotateLogs({ module: 'sql-service' }))
 
-export const SQLServices = Layer.scopedDiscard(make).pipe(
-	Layer.provide(SqlAuthor.Live),
+export const ServiceSQL = Layer.scopedDiscard(make).pipe(
+	Layer.provide(SqlAuthor.Layer),
 )

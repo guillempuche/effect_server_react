@@ -11,12 +11,11 @@ import { NodeServer } from 'effect-http-node'
 
 import {
 	RepoAuthor,
-	RepoServices,
-	SQLServices,
-	SqlLive,
+	ServiceRepositories,
+	ServiceSQL,
 } from '@journals/adapters/repositories'
 import { api } from './api.js'
-import { appError, loggerDebug } from './utils.js'
+import { ServiceLoggerDebug, appError } from './utils.js'
 
 export const app = Effect.gen(function* () {
 	const repoAuthor = yield* RepoAuthor
@@ -56,22 +55,21 @@ export const app = Effect.gen(function* () {
 /**
  * OpenTelemetry service in console
  */
-const OpenTelemetryService = NodeSdk.layer(() => ({
-	resource: { serviceName: 'notes' },
+const ServiceOpenTelemetry = NodeSdk.layer(() => ({
+	resource: { serviceName: 'journals' },
 	spanProcessor: new BatchSpanProcessor(new ConsoleSpanExporter()),
 }))
 
 // Run the server
 app.pipe(
-	Effect.flatMap(NodeServer.listen({ port: 4000 })),
 	Effect.tap(Effect.logInfo('Server docs at http://localhost:4000/docs#/')), // Tap is for side-effecting operations that do not change the value being passed through the chain
+	Effect.flatMap(NodeServer.listen({ port: 4000 })),
 	Effect.provide(
-		Layer.merge(RepoServices, SqlLive.pipe(Layer.provide(DevTools.layer()))),
+		Layer.mergeAll(ServiceRepositories, ServiceSQL, ServiceOpenTelemetry).pipe(
+			Layer.provide(DevTools.layer()),
+			Layer.provide(ServiceLoggerDebug),
+		),
 	),
-	Effect.provide(SQLServices),
-	Effect.provide(OpenTelemetryService),
-	Effect.provide(loggerDebug),
 	Effect.tapErrorCause(Effect.logError), // Tap andles errors by logging them without interrupting the chain of effects.
-	// @ts-expect-error
 	NodeRuntime.runMain,
 )

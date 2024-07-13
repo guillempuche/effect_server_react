@@ -17,6 +17,7 @@ Server:
 - Endpoints, repos, SQLite <https://github.com/mikearnaldi/lambda-conf-2024/blob/main/src/api-spec.ts>
 - CORS middleware <https://github.com/charlesilieff/poc-back-end-effect/blob/1c062c2a1e399c16a3f3ae73aa5e148f168be971/src/api/routes/products/impl/products-live.ts#L47>
 - Limit requests <https://github.com/JJayet/text-justify/blob/main/src/main.ts#L49>
+- RPC server <https://x.com/SandroMaglione/status/1807029445380735006> + Client <https://x.com/SandroMaglione/status/1807399318220881985?t=F6s65tUjOQmLMa4UnS1Hsg&s=09>
 
 Authentication:
 
@@ -33,3 +34,7 @@ Telemetry:
 - Metrics <https://github.com/IMax153/advanced-effect-workshop/blob/main/workshop/solutions/session-04/exercise-02.ts>, <https://github.com/mikearnaldi/lambda-conf-2024/blob/main/src/tracing.ts>
 - Logs <https://github.com/dmmulroy/effect-twitch-integrations/blob/main/src/twitch/service.ts>
 - OpenTelemetry <https://gist.github.com/ecyrbe/26e4f8ed8a68bd73e8b3575481f55775#file-note-api-ts-L202>
+
+JSON:
+
+- decode, parser error <https://x.com/SandroMaglione/status/1806373726734242238/>
