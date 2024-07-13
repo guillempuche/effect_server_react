@@ -11,5 +11,5 @@ const make = Effect.gen(function* () {
 }).pipe(Effect.annotateLogs({ module: 'sql-service' }))
 
 export const ServiceRepositories = Layer.scopedDiscard(make).pipe(
-	Layer.provide(RepoAuthor.Layer),
+	Layer.provideMerge(RepoAuthor.Layer),
 )
