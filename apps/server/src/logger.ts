@@ -1,17 +1,17 @@
 // https://github.com/PREreview/coar-notify/blob/main/src/Logger.ts
-import { HttpClient } from '@effect/platform'
+import { Headers, HttpClient, HttpClientRequest } from '@effect/platform'
 import { Effect } from 'effect'
 
-export const LoggingHttpClient = HttpClient.client.makeDefault(request =>
+export const LoggingHttpClient = HttpClient.makeDefault(request =>
 	Effect.Do.pipe(
 		Effect.tap(() =>
 			Effect.logDebug('Sending HTTP Request').pipe(
 				Effect.annotateLogs({
-					headers: HttpClient.headers.redact(request.headers, 'authorization'),
+					headers: Headers.redact(request.headers, 'authorization'),
 				}),
 			),
 		),
-		Effect.zipRight(HttpClient.client.fetch(request)),
+		Effect.zipRight(HttpClient.fetch(request)),
 		Effect.tap(response =>
 			Effect.logDebug('Received HTTP response').pipe(
 				Effect.annotateLogs({
@@ -27,7 +27,7 @@ export const LoggingHttpClient = HttpClient.client.makeDefault(request =>
 		),
 		Effect.annotateLogs({
 			url: request.url,
-			urlParams: HttpClient.urlParams.toString(request.urlParams),
+			urlParams: HttpClientRequest.urlParamsBody(request.urlParams).toString(),
 			method: request.method,
 		}),
 		Effect.withLogSpan('fetch'),

@@ -11,26 +11,26 @@ import {
 import { ServiceSqlBase } from './db.js'
 
 const make = Effect.gen(function* (_) {
-	const sql = yield* Sql.client.Client
+	const sql = yield* Sql.SqlClient.SqlClient
 
-	const InsertAuthor = Sql.schema.single({
+	const InsertAuthor = Sql.SqlSchema.single({
 		Request: UseCaseAuthorAdd,
 		Result: Author,
 		execute: author => sql`INSERT INTO authors ${sql.insert(author)}`,
 	})
 
-	const DeleteAuthor = Sql.schema.void({
+	const DeleteAuthor = Sql.SqlSchema.void({
 		Request: UseCaseAuthorDelete,
 		execute: id => sql`DELETE FROM authors WHERE id = ${id}`,
 	})
 
-	const GetAuthor = Sql.schema.findOne({
+	const GetAuthor = Sql.SqlSchema.findOne({
 		Request: UseCaseAuthorGet,
 		Result: Author,
 		execute: id => sql`SELECT * FROM authors WHERE id = ${id}`,
 	})
 
-	const UpdateAuthor = Sql.schema.single({
+	const UpdateAuthor = Sql.SqlSchema.single({
 		Request: UseCaseAuthorUpdate,
 		Result: Author,
 		execute: ({ id, updated_at, ...rest }) => {
